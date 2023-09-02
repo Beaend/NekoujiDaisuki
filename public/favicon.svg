@@ -1,3 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M27.562 26L17.17 8.928l2.366-3.888L17.828 4L16 7.005L14.17 4l-1.708 1.04l2.366 3.888L4.438 26H2v2h28v-2zM16 10.85L25.22 26H17v-8h-2v8H6.78z" fill="#222" />
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="svg_nekouji" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.svg_logo_c{fill:#00BDFF;}
+	.svg_logo_n{fill:#BFBFBF;}
+</style>
+<circle class="svg_logo_c" cx="256" cy="256" r="57.5"/>
+<path class="svg_logo_n" d="M185,240l-54,241H37.23c-3.2,0-5.57-2.96-4.88-6.08l98.13-441.57c0.31-1.37,1.52-2.35,2.93-2.35h90.27
+	c4.36,0,8.22,2.83,9.53,6.98L280,187.5C238,173,195,199,185,240z"/>
+<path class="svg_logo_n" d="M381,31h93.77c3.2,0,5.57,2.96,4.88,6.08l-98.13,441.57c-0.31,1.37-1.52,2.35-2.93,2.35h-90.27
+	c-4.36,0-8.22-2.83-9.53-6.98L232,324.5c42,14.5,85-11.5,95-52.5l54-240.5"/>
 </svg>
