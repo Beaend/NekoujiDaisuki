@@ -17,6 +17,11 @@
     "sizecheck": "npx vite-bundle-visualizer"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
     "@unhead/vue": "^1.1.30",
     "@unocss/reset": "^0.53.5",
     "@vueuse/core": "^10.2.1",
@@ -49,6 +54,7 @@
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-shiki": "^0.9.0",
     "pnpm": "^8.6.7",
+    "sass": "^1.66.1",
     "shiki": "^0.14.3",
     "simple-git-hooks": "^2.8.1",
     "taze": "^0.11.2",
