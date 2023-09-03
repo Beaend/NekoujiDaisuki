@@ -8,8 +8,12 @@ body,
   padding: 0;
 }
 
+html {
+  background: rgb(223,223,223);
+}
+
 html.dark {
-  background: #121212;
+  background: #0f1113;
   color-scheme: dark;
 }
 
