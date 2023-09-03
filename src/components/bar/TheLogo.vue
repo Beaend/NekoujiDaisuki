@@ -11,7 +11,7 @@ export default {
   </router-link>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #logo {
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@ export default {
   font-weight: 700;
   line-height: 50px;
   margin-top: 2px;
-  color: $bar_color;
+  color: var(--bar_color);
   transform: skew(-10deg);
 }
 </style>
