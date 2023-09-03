@@ -1,20 +1,20 @@
 <script setup lang="ts">
-const { modelValue } = defineModels<{
-  modelValue: string
-}>()
+import { barStore } from '~/stores/bar'
+
+const bar = barStore()
 </script>
 
 <template>
   <input
-    id="input"
-    v-model="modelValue"
-    type="text"
+    id="search"
+    v-model="bar.searchValue"
     v-bind="$attrs"
-    p="x-4 y-2"
+    type="search"
+    h="40px"
     w="250px"
-    text="center"
-    bg="transparent"
-    border="~ rounded gray-200 dark:gray-700"
+    class="input"
+    bg="#191c1f"
+    border="~ rounded gray-200 dark:gray-900"
     outline="none active:none"
   >
 </template>
