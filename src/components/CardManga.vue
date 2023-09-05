@@ -5,4 +5,5 @@ const props = defineProps({
 </script>
 
 <template>
+  {{manga.title}}
 </template>
