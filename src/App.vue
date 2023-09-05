@@ -2,6 +2,22 @@
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
+import { windowStore } from '~/stores/window'
+
+const siteWindow = windowStore()
+
+onMounted(() => {
+  setWindowStoreSizeValue()
+  window.addEventListener('resize', () => {
+    setWindowStoreSizeValue()
+  })
+})
+
+function setWindowStoreSizeValue(): void {
+  siteWindow.screenSize.width = window.innerWidth
+  siteWindow.screenSize.height = window.innerHeight
+}
+
 useHead({
   title: 'Nekouji Daisuki',
   meta: [
