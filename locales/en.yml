@@ -11,3 +11,8 @@ anime: Anime
 airing: Airing
 manga: Manga
 ranobe: Ranobe
+seasons:
+  1: Winter
+  2: Spring
+  3: Summer
+  4: Fall
