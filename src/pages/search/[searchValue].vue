@@ -36,32 +36,27 @@ onBeforeRouteUpdate(async (to, from) => {
 
 <template>
   <main>
-    <h1>Поиск: {{ route.params.searchValue }}</h1>
+    <h1>{{ $t('search') }}: {{ route.params.searchValue }}</h1>
     <h2 v-if="anime.length > 0">Аниме</h2>
-    <template v-if="anime.length > 0">
-      <template v-for="item in anime">
-        {{ item.title }}
-      </template>
-    </template>
+    <div v-if="anime.length > 0" class="shelf">
+      <CardAnime
+        v-for="item in anime" :key="item.title"
+        :anime="item"
+      />
+    </div>
     <h2 v-if="manga.length > 0">Манга</h2>
-    <template v-if="manga.length > 0">
-      <template  v-for="item in manga">
-        {{ item.title }}
-      </template>
-    </template>
+    <div v-if="manga.length > 0" class="shelf">
+      <CardManga
+        v-for="item in manga" :key="item.title"
+        :manga="item"
+      />
+    </div>
     <h2 v-if="books.length > 0">Ранобе</h2>
-    <template v-if="books.length > 0">
-      <template  v-for="item in books">
-        {{ item.title }}
-      </template>
-    </template>
+    <div v-if="books.length > 0" class="shelf">
+      <CardRanobe
+        v-for="item in books" :key="item.title"
+        :ranobe="item"
+      />
+    </div>
   </main>
 </template>
-
-<style scoped>
-  h1 {
-    color: rgb(223, 223, 223);
-    font-size: 1.8em;
-    font-weight: 500;
-  }
-</style>
