@@ -67,9 +67,6 @@ const { t } = useI18n()
           <img src="/img/anichart.png" alt="AniChart">
         </a>
       </div>
-      <div id="second-info" class="second">
-        <FontAwesomeIcon icon="fa-solid fa-calendar" />
-      </div>
       <div id="second-settings" class="second">
         <FontAwesomeIcon icon="fa-solid fa-cog" />
       </div>
