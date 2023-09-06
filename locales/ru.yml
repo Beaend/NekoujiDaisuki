@@ -22,6 +22,7 @@ quality:
     green: Хорошее
     lblue: Отличное
     gold: ТОП/Лучшее в сезоне
+    red: Не смотрел/не рекомендую
   manga:
     base: Читабельно
     green: Хорошее
@@ -37,3 +38,6 @@ comics:
   manga: Манга
   manhua: Китайская Маньхуа
   manhwa: Корейская Манхва
+settings:
+  text: Настройки
+  theme: Тема
