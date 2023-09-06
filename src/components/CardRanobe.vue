@@ -5,5 +5,12 @@ const props = defineProps({
 </script>
 
 <template>
-  {{ranobe.title}}
+  <article class="card book ranobe" :class="ranobe.color">
+    <div class="left">
+      {{ranobe.title}}
+    </div>
+    <div class="right">
+      {{ranobe.title_ru}}
+    </div>
+  </article>
 </template>
