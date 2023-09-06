@@ -2,7 +2,7 @@
 import Api from '~/services/ApiCall.js'
 
 defineOptions({
-  name: 'RanobePage',
+  name: 'MangaPage',
 })
 
 const { t } = useI18n()
