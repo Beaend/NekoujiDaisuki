@@ -78,11 +78,13 @@ const modal = modalStore()
   height: 50px;
   line-height: 50px;
   cursor: default;
+  position: relative;
   display: flex;
   .text {
     flex-grow: 1;
   }
   .close {
+    position: absolute;
     right: 0;
     width: 50px;
   }
