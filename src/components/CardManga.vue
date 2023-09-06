@@ -5,5 +5,12 @@ const props = defineProps({
 </script>
 
 <template>
-  {{manga.title}}
+  <article class="card manga" :class="manga.color">
+    <div class="left">
+      {{manga.title}}
+    </div>
+    <div class="right">
+      {{manga.title_ru}}
+    </div>
+  </article>
 </template>
