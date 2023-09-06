@@ -46,7 +46,7 @@ function getAnimeByYear(year) {
 
 <template>
   <main>
-    <h1>{{ route.params.year }}</h1>
+    <h1>{{ t('anime') }} {{ route.params.year }}</h1>
     <h2 v-if="winter.length > 0">{{ t('season.1') }}</h2>
     <div v-if="winter.length > 0" class="shelf winter">
       <CardAnime
