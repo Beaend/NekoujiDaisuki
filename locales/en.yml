@@ -17,10 +17,21 @@ season:
   4: Fall
 quality:
   text: Quality
-  base: Watchable/Readable
-  green: Good
-  lblue: Cool
-  gold: Best(in season at least)
+  anime:
+    base: Watchable
+    green: Good
+    lblue: Cool
+    gold: Best(in season at least)
+  manga:
+    base: Readable
+    green: Good
+    lblue: Cool
+    gold: Best
+  ranobe:
+    base: Readable
+    green: Good
+    lblue: Cool
+    gold: Best
 comics:
   en: Comics
   manga: Manga

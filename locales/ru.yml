@@ -17,10 +17,21 @@ season:
   4: Осень
 quality:
   text: Качество
-  base: Смотрибельно/Читабельно
-  green: Хорошее
-  lblue: Отличное
-  gold: ТОП/Лучшее в сезоне
+  anime:
+    base: Смотрибельно
+    green: Хорошее
+    lblue: Отличное
+    gold: ТОП/Лучшее в сезоне
+  manga:
+    base: Читабельно
+    green: Хорошее
+    lblue: Отличное
+    gold: ТОП
+  ranobe:
+    base: Читабельно
+    green: Хорошее
+    lblue: Отличное
+    gold: ТОП
 comics:
   en: Комиксы
   manga: Манга
