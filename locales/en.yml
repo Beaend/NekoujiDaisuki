@@ -9,10 +9,20 @@ not-found: Not found
 search: Search
 anime: Anime
 airing: Airing
-manga: Manga
 ranobe: Ranobe
-seasons:
+season:
   1: Winter
   2: Spring
   3: Summer
   4: Fall
+quality:
+  text: Quality
+  base: Watchable/Readable
+  green: Good
+  lblue: Cool
+  gold: Best(in season at least)
+comics:
+  en: Comics
+  manga: Manga
+  manhua: Chinese Manhua
+  manhwa: Korean Manhwa
