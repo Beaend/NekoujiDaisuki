@@ -4,14 +4,38 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 const props = defineProps({
   anime: Array,
 })
+
+const { t } = useI18n()
+
+onMounted(() => {
+  if (props.anime.color === '') {
+    // eslint-disable-next-line vue/no-mutating-props
+    props.anime.color = 'base'
+  }
+})
+
+const overQuality = ref(false)
+
+function qualityJoin() {
+  overQuality.value = true
+}
+function qualityLeave() {
+  overQuality.value = false
+}
 </script>
 
 <template>
   <article class="card anime" :class="anime.color">
     <div class="left">
       <div class="image" :style="`background-image: url(${anime.image})`">
-        <div class="quality">
-          <FontAwesomeIcon icon="fa-solid fa-calendar" />
+        <div class="quality" :class="{ over: overQuality }" @mouseover="qualityJoin()" @mouseleave="qualityLeave()">
+          <div class="quality-icon">
+            <FontAwesomeIcon icon="fa-solid fa-calendar" class="quality-color" />
+          </div>
+          <div class="quality-about">
+            <div class="quality-line quality-bg" />
+            {{t('quality.text')}}: {{t(`quality.${anime.color}`)}}
+          </div>
         </div>
         <div class="texts">
           <span v-if="anime.tag">
@@ -59,9 +83,14 @@ const props = defineProps({
   $item_color_strong: rgb(163,184,204);
   $height: 265px;
 
-  .green .quality svg {color: #1dff1d;}
-  .lblue .quality svg {color: rgb(63,191,256);}
-  .gold .quality svg {color: #FFD700;}
+  .quality-color {color: rgb(143,161,179);}
+  .green .quality-color {color: #1dff1d;}
+  .lblue .quality-color{color: rgb(63,191,256);}
+  .gold .quality-color {color: #FFD700;}
+
+  .green .quality-bg {background: #1dff1d;}
+  .lblue .quality-bg {background: rgb(63,191,256);}
+  .gold .quality-bg {background: #FFD700;}
 
   .card {
     font-size: 1.2rem;
@@ -97,7 +126,7 @@ const props = defineProps({
     position: relative;
   }
 
-  .card .image {
+  .card .left .image {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -117,11 +146,33 @@ const props = defineProps({
     border-radius: 5px;
     padding: 5px;
     color: $item_color;
+    transition: width 100ms;
+    svg {
+      width: 20px;
+      height: 20px;
+      vertical-align: .125em;
+    }
+    .quality-about {
+      display: none;
+    }
   }
-  .card .left .quality svg{
-    width: 20px;
-    height: 20px;
-    vertical-align: .125em;
+  .card .left .quality.over {
+    width: 175px;
+    height: auto;
+    .quality-icon {
+      display: none;
+    }
+    .quality-about {
+      display: flex;
+      flex-direction: column;
+      font-size: .9rem;
+      .quality-line {
+        width: 175px;
+        height: 5px;
+        margin: -5px -5px 0;
+        border-radius: 5px 5px 0 0;
+      }
+    }
   }
   .card .left .texts {
     background: rgba(0,0,0,0.6);
