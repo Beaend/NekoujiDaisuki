@@ -19,11 +19,14 @@ function getCurrentSeason() {
   const mm = new Date().getMonth() + 1
   if (mm < 4) {
     season.value = 1
-  } else if (mm < 7) {
+  }
+  else if (mm < 7) {
     season.value = 2
-  } else if (mm < 10) {
+  }
+  else if (mm < 10) {
     season.value = 3
-  } else {
+  }
+  else {
     season.value = 4
   }
 }
@@ -39,7 +42,8 @@ function getAnime() {
       if (refind.value) {
         if (season.value > 1) {
           season.value = season.value - 1
-        } else {
+        }
+        else {
           season.value = 4
           year.value = year.value - 1
         }
