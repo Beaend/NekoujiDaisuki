@@ -24,22 +24,15 @@ function getAnimeByYear(year) {
     .then((response) => {
       anime.value = response.data
       for (let i = 0; i < response.data.length; i++) {
-        if (response.data[i].season === 1) {
+        if (response.data[i].season === 1)
           winter.value.push(response.data[i])
-        }
-        else if (response.data[i].season === 2) {
+        else if (response.data[i].season === 2)
           spring.value.push(response.data[i])
-        }
-        else if (response.data[i].season === 3) {
+        else if (response.data[i].season === 3)
           summer.value.push(response.data[i])
-        }
-        else if (response.data[i].season === 4) {
+        else if (response.data[i].season === 4)
           fall.value.push(response.data[i])
-        }
       }
-    })
-    .catch((e) => {
-      console.log(e)
     })
 }
 </script>
