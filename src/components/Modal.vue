@@ -62,6 +62,11 @@ const modal = modalStore()
   width: 100%;
   .above {
     background: rgb(63,71,79);
+    color: var(--bar_color);
+    font-weight: normal;
+    .text {
+      text-shadow: none;
+    }
   }
   .window {
     flex-grow: 1;
@@ -80,8 +85,11 @@ const modal = modalStore()
   cursor: default;
   position: relative;
   display: flex;
+  color: var(--blue);
+  font-weight: bold;
   .text {
     flex-grow: 1;
+    text-shadow:  2px 1px 3px rgb(31,31,31);
   }
   .close {
     position: absolute;
@@ -99,6 +107,7 @@ svg {
   background: rgb(47,55,63);
   padding: 10px;
   cursor: default;
+  color: var(--bar_color);
 }
 .modal.tablet .window,
 .modal.pc .window {
