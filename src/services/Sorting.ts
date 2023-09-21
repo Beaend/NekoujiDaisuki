@@ -1,13 +1,13 @@
 const qualityNums: { [index: string]: number } = { gold: 1, lblue: 2, green: 3, base: 4, red: 5 }
 
-class Sorting {
-  private data: any
+export class Sorting {
+  private data: { [index: string]: any }
   constructor(data: any) {
     this.data = data
   }
 
   byName(key: string) {
-    this.data = this.data.sort((a: any, b: any) => {
+    this.data = this.data.sort((a: { [index: string]: any }, b: { [index: string]: any }) => {
       const titleA = a[key].toLowerCase()
       const titleB = b[key].toLowerCase()
       if (titleA < titleB)
@@ -16,13 +16,12 @@ class Sorting {
         return 1
       return 0
     })
-    return this.data
   }
 
   byQuality() {
-    this.data = this.data.sort((a: any, b: any) => {
-      let qualityA = null
-      let qualityB = null
+    this.data = this.data.sort((a: { [index: string]: any }, b: { [index: string]: any }) => {
+      let qualityA: number
+      let qualityB: number
       if (a.color == null || a.color === '')
         qualityA = 4
       else
@@ -37,16 +36,14 @@ class Sorting {
         return 1
       return 0
     })
-    return this.data
   }
 
   reverse() {
     this.data = this.data.reverse()
-    return this.data
   }
 
   byYear() {
-    this.data = this.data.sort((a: any, b: any) => {
+    this.data = this.data.sort((a: { [index: string]: any }, b: { [index: string]: any }) => {
       if (a.year > b.year)
         return 1
       else if (a.year < b.year)
@@ -57,10 +54,9 @@ class Sorting {
         return -1
       return 0
     })
-    return this.data
   }
 
-  switchShowQuality(name: number) {
+  switchShowQuality(num: number) {
     let nowNum = 0
     for (const el in this.data) {
       let elQuality = null
@@ -68,11 +64,9 @@ class Sorting {
         elQuality = 4
       else
         elQuality = qualityNums[this.data[el].color]
-      if (elQuality === name)
+      if (elQuality === num)
         this.data[nowNum].show = !this.data[el].show
       nowNum++
     }
   }
 }
-
-export default Sorting
