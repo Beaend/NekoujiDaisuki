@@ -41,3 +41,13 @@ comics:
 settings:
   text: Настройки
   theme: Тема
+  themes:
+    dark: Тёмная
+    light: Светлая
+  title: Названия
+  titles:
+    romanji: Романзи
+    original: Оригинальный
+    en: Английский
+  title_ru: Название на русском
+  comments: Комментарии
