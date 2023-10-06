@@ -21,16 +21,8 @@ export class Sorting {
 
   byQuality() {
     this.data = this.data.sort((a: { [index: string]: any }, b: { [index: string]: any }) => {
-      let qualityA: number
-      let qualityB: number
-      if (a.color == null || a.color === '')
-        qualityA = 4
-      else
-        qualityA = qualityNums[a.color]
-      if (b.color == null || b.color === '')
-        qualityB = 4
-      else
-        qualityB = qualityNums[b.color]
+      const qualityA: number = qualityNums[a.color]
+      const qualityB: number = qualityNums[b.color]
       if (qualityA < qualityB)
         return -1
       else if (qualityB < qualityA)
