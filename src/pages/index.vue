@@ -51,7 +51,7 @@ function getAnime() {
     })
 }
 
-onMounted(() => {
+onBeforeMount(() => {
   getYear()
   getCurrentSeason()
   getAnime()
