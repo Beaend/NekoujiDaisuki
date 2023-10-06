@@ -32,10 +32,7 @@ const modal = modalStore()
   </div>
 </template>
 
-<style scoped>
-.hidden {
-  display: none;
-}
+<style>
 .wrapper {
   width: 100%;
   height: 100%;
@@ -112,5 +109,10 @@ svg {
 .modal.tablet .window,
 .modal.pc .window {
   border-radius: 10px;
+}
+
+.window hr {
+  border-color: var(--window-button-bg);
+  margin: 5px 0;
 }
 </style>
