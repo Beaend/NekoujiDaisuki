@@ -2,13 +2,13 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const props = defineProps({
-  anime: Array,
+  anime: Object,
 })
 
 const { t } = useI18n()
 
 onMounted(() => {
-  if (props.anime.color === '') {
+  if (props.anime.color === '' || props.anime.color === null) {
     // eslint-disable-next-line vue/no-mutating-props
     props.anime.color = 'base'
   }
@@ -25,7 +25,7 @@ function qualityLeave() {
 </script>
 
 <template>
-  <article class="card anime" :class="anime.color">
+  <article class="card anime" :class="[anime.color, anime.type, { hidden: !anime.show }]">
     <div class="left">
       <div class="image" :style="`background-image: url(${anime.image})`">
         <div class="quality" :class="{ over: overQuality }" @mouseover="qualityJoin()" @mouseleave="qualityLeave()">
@@ -34,7 +34,7 @@ function qualityLeave() {
           </div>
           <div class="quality-about">
             <div class="quality-line quality-bg" />
-            {{t('quality.text')}}: {{t(`quality.${anime.color}`)}}
+            {{t('quality.text')}}: {{t(`quality.anime.${anime.color}`)}}
           </div>
         </div>
         <div class="texts">
@@ -68,8 +68,12 @@ function qualityLeave() {
       </div>
       <hr>
       <div class="right-footer">
-        {{anime.genres}}
-        {{anime.genres2}}
+        <span v-for="genre in anime.genres" :key="genre[0]">
+          <router-link :to="`/anime/genre/${genre[1]}`">{{ genre[0] }}</router-link>
+        </span>
+        <span v-for="genre in anime.genres2" :key="genre[0]">
+          <router-link :to="`/anime/genre/${genre[1]}`">{{ genre[0] }}</router-link>
+        </span>
       </div>
     </div>
   </article>
@@ -146,7 +150,8 @@ function qualityLeave() {
     border-radius: 5px;
     padding: 5px;
     color: $item_color;
-    transition: width 100ms;
+    transition: width 50ms;
+    cursor: default;
     svg {
       width: 20px;
       height: 20px;
@@ -154,6 +159,11 @@ function qualityLeave() {
     }
     .quality-about {
       display: none;
+      min-height: 20px;
+      .quality-line {
+        width: 30px;
+        transition: width 50ms;
+      }
     }
   }
   .card .left .quality.over {
@@ -248,5 +258,11 @@ function qualityLeave() {
     font-size: 0.8rem;
     transition: 0.5s;
     cursor: default;
+  }
+  .card .right .right-footer span {
+    margin: 2px 4px;
+    padding: 4px 8px;
+    background: rgb(31,33,35);
+    border-radius: 4px;
   }
 </style>
