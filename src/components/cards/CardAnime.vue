@@ -18,7 +18,7 @@ function qualityLeave() {
 </script>
 
 <template>
-  <article class="card anime" :class="[anime.color, anime.type]"> <!-- , { hidden: !anime.show } -->
+  <article class="card anime" :class="[anime.color, anime.type, { hidden: !anime.show }]">
     <div class="left">
       <div class="image" :style="`background-image: url(${anime.image})`">
         <div class="quality" :class="{ over: overQuality }" @mouseover="qualityJoin()" @mouseleave="qualityLeave()">
