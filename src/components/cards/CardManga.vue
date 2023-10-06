@@ -1,13 +1,17 @@
 <script setup lang="ts">
 const props = defineProps({
-  manga: Array,
+  manga: Object,
 })
 </script>
 
 <template>
   <article class="card manga" :class="manga.color">
     <div class="left">
-      {{manga.title}}
+      <div class="image" :style="`background-image: url(${manga.image})`">
+        <div class="texts">
+          {{manga.title}}
+        </div>
+      </div>
     </div>
     <div class="right">
       {{manga.title_ru}}
