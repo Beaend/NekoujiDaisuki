@@ -16,8 +16,8 @@ const emit = defineEmits(['update:rawData'])
 const sorting = new SortingTs(props.rawData)
 
 function sort(key, param = null) {
-  const local = props.settings
-  if (props.settings.sort === key) {
+  const local: object[string] = props.settings
+  if (local.sort === key) {
     if (param === null || local.param === param) {
       sorting.reverse()
       local.reverse = !local.reverse
@@ -41,7 +41,7 @@ function sort(key, param = null) {
 }
 function switchShowQuality(number) {
   sorting.switchShowQuality(number)
-  const local = props.settings
+  const local: object[number] = props.settings
   local.show[number] = !local.show[number]
 }
 </script>
