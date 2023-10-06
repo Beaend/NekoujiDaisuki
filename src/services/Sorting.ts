@@ -16,6 +16,7 @@ export class Sorting {
         return 1
       return 0
     })
+    return this.data
   }
 
   byQuality() {
@@ -36,10 +37,12 @@ export class Sorting {
         return 1
       return 0
     })
+    return this.data
   }
 
   reverse() {
     this.data = this.data.reverse()
+    return this.data
   }
 
   byYear() {
@@ -54,6 +57,7 @@ export class Sorting {
         return -1
       return 0
     })
+    return this.data
   }
 
   switchShowQuality(num: number) {
