@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import Sorting from '~/components/Sorting.vue'
 import Api from '~/services/ApiCall.js'
+import { userCookies } from '~/stores/cookies'
 
 defineOptions({
   name: 'IndexPage',
@@ -32,6 +34,7 @@ function getAnime() {
       for (let i = 0; i < response.data.length; i++) {
         if (response.data[i].season === season.value) {
           anime.value.push(response.data[i])
+          anime.value[anime.value.length - 1].show = true
           refind.value = false
         }
       }
@@ -53,11 +56,17 @@ onMounted(() => {
   getCurrentSeason()
   getAnime()
 })
+
+const cookies = userCookies()
 </script>
 
 <template>
   <main>
-    <h2>{{ t(`season.${season}`) }} {{year}}</h2>
+    <Sorting
+      v-model="anime" :raw-data="anime" :settings="cookies.sorting.index"
+      :hide-years="true"
+    />
+    <h2>{{ t(`season.${season}`) }} {{ year }}</h2>
     <div class="shelf">
       <CardAnime v-for="item in anime" :key="item.id" :anime="item" />
     </div>
