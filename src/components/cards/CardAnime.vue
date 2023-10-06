@@ -7,13 +7,6 @@ const props = defineProps({
 
 const { t } = useI18n()
 
-onMounted(() => {
-  if (props.anime.color === '' || props.anime.color === null) {
-    // eslint-disable-next-line vue/no-mutating-props
-    props.anime.color = 'base'
-  }
-})
-
 const overQuality = ref(false)
 
 function qualityJoin() {
@@ -25,7 +18,7 @@ function qualityLeave() {
 </script>
 
 <template>
-  <article class="card anime" :class="[anime.color, anime.type, { hidden: !anime.show }]">
+  <article class="card anime" :class="[anime.color, anime.type]"> <!-- , { hidden: !anime.show } -->
     <div class="left">
       <div class="image" :style="`background-image: url(${anime.image})`">
         <div class="quality" :class="{ over: overQuality }" @mouseover="qualityJoin()" @mouseleave="qualityLeave()">
