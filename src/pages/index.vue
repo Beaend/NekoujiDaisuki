@@ -34,7 +34,6 @@ function getAnime() {
       for (let i = 0; i < response.data.length; i++) {
         if (response.data[i].season === season.value) {
           anime.value.push(response.data[i])
-          anime.value[anime.value.length - 1].show = true
           refind.value = false
         }
       }
