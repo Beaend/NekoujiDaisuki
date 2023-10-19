@@ -37,7 +37,6 @@ onBeforeMount(() => {
     <Sorting
       v-if="anime.length > 0"
       v-model="anime" :raw-data="anime" :settings="cookies.sorting.index"
-      :hide-years="true"
     />
     <div v-if="anime.length > 0" class="shelf">
       <CardAnime
@@ -51,7 +50,6 @@ onBeforeMount(() => {
     <Sorting
       v-if="manga.length > 0"
       v-model="manga" :raw-data="manga" :settings="cookies.sorting.index"
-      :hide-years="true"
     />
     <div v-if="manga.length > 0" class="shelf">
       <CardManga
@@ -65,7 +63,6 @@ onBeforeMount(() => {
     <Sorting
       v-if="books.length > 0"
       v-model="books" :raw-data="books" :settings="cookies.sorting.index"
-      :hide-years="true"
     />
     <div v-if="books.length > 0" class="shelf">
       <CardRanobe
