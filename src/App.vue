@@ -14,8 +14,8 @@ onMounted(() => {
 })
 
 function setWindowStoreSizeValue(): void {
-  siteWindow.screenSize.width = window.innerWidth
-  siteWindow.screenSize.height = window.innerHeight
+  siteWindow.width = window.innerWidth
+  siteWindow.height = window.innerHeight
 }
 
 useHead({
@@ -40,4 +40,5 @@ useHead({
 <template>
   <TheBar />
   <RouterView />
+  <SettingsWindow />
 </template>
