@@ -2,12 +2,17 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import TheLogo from '~/components/bar/TheLogo.vue'
 import { barStore } from '~/stores/bar'
+import { windowStore } from '~/stores/window'
+import { modalStore } from '~/stores/modals'
 
 defineOptions({
   name: 'BarTop',
 })
 
 const bar = barStore()
+const window = windowStore()
+const modal = modalStore()
+const selectedYear = ref(0)
 
 const router = useRouter()
 
@@ -17,27 +22,46 @@ function goTo(url) {
   else
     router.push(url)
 }
-
+function resetYear() {
+  selectedYear.value = 0
+}
 const { t } = useI18n()
 </script>
 
 <template>
-  <div id="bar-top" :class="{ focusSearch: bar.searchFocused }">
-    <div id="first">
+  <div id="bar-top" :class="{ focusSearch: bar.searchFocused, mobile: window.getBarType === 'bottom', [window.getDeviceType]: window.getDeviceType }">
+    <div id="bar-top-first">
       <TheLogo />
       <div id="bar-nav" class="first">
-        <span style="display: flex;"><router-link to="/airing" title="Airing">
-          <FontAwesomeIcon v-if="bar.searchFocused" icon="fa-solid fa-calendar-alt" />
-          <template v-if="!bar.searchFocused">Аниме</template>
-        </router-link></span>
-        <span style="display: flex;"><router-link to="/manga" title="Manga">
-          <FontAwesomeIcon v-if="bar.searchFocused" icon="fa-solid fa-file-image" />
-          <template v-if="!bar.searchFocused">Манга</template>
-        </router-link></span>
-        <span style="display: flex;"><router-link to="/ranobe" title="Ranobe">
-          <FontAwesomeIcon v-if="bar.searchFocused" icon="fa-solid fa-book" />
-          <template v-if="!bar.searchFocused">Книги</template>
-        </router-link></span>
+        <span class="dropdown">
+          <span class="like-button flex">
+            <FontAwesomeIcon icon="fa-solid fa-calendar-alt" />
+            <span class="like-button-title"> {{ t('anime') }} </span>
+          </span>
+          <span class="dropdown-content">
+            <span>
+              <router-link to="/" @click="resetYear">Актуальный сезон</router-link>
+            </span>
+            <span class="select-year">
+              <select v-model="selectedYear" class="decorated" @change="goTo(`/anime/year/${selectedYear}`)">
+                <option value="0" disabled>За год</option>
+                <option v-for="year in bar.years" :key="year" :value="year">{{year}}</option>
+              </select>
+            </span>
+            <span>Или по жанру:</span>
+            <span class="flex flex-col">
+              <router-link v-for="genre in bar.genres" :key="genre" :to="`/anime/genre/${genre[0]}`" @click="resetYear">{{genre[1]}}</router-link>
+            </span>
+          </span>
+        </span>
+        <router-link class="flex like-button" to="/manga" title="Manga">
+          <FontAwesomeIcon icon="fa-solid fa-file-image" />
+          <span class="like-button-title">{{ t('comics.manga') }}</span>
+        </router-link>
+        <router-link class="flex like-button" to="/ranobe" title="Ranobe">
+          <FontAwesomeIcon icon="fa-solid fa-book" />
+          <span class="like-button-title">{{ t('ranobe') }}</span>
+        </router-link>
       </div>
       <div id="bar-search" class="first">
         <span v-if="bar.searchFocused" class="search-field">
@@ -58,7 +82,7 @@ const { t } = useI18n()
         </button>
       </div>
     </div>
-    <div id="second">
+    <div id="bar-top-second">
       <div id="second-other">
         <a href="https://myanimelist.net/profile/nekouji" title="MyAnimeList" target="_blank">
           <img src="/img/myanimelist.png" alt="MyAnimeList">
@@ -67,7 +91,7 @@ const { t } = useI18n()
           <img src="/img/anichart.png" alt="AniChart">
         </a>
       </div>
-      <div id="second-settings" class="second">
+      <div id="second-settings" class="second" @click="modal.openSettings()">
         <FontAwesomeIcon icon="fa-solid fa-cog" />
       </div>
     </div>
@@ -89,17 +113,25 @@ $bar_active: rgb(63,127,191);
   padding: 20px;
   color: $bar_color;
   font-size: 1.1rem;
-  line-height: 30px;
 }
-#first {
+#bar-top.mobile {
+  height: 90px;
+  .first {
+    display: none;
+  }
+  #bar-top-second {
+    display: none;
+  }
+}
+#bar-top-first {
   display: flex;
   justify-content: center;
 }
-#first > div,
-#second > div {
+#bar-top-first > div,
+#bar-top-second > div {
   margin: 0 10px;
 }
-#second {
+#bar-top-second {
   display: flex;
   justify-content: right;
   margin: 10px 0px;
@@ -111,8 +143,8 @@ $bar_active: rgb(63,127,191);
   border-radius: 5px;
   transition: 1s;
 }
-.first:hover,
-button:hover {
+button:hover,
+.like-button:hover {
   cursor: pointer;
   > svg {
     color: $bar_active;
@@ -133,12 +165,24 @@ button > svg {
     margin: 0 5px;
   }
   span {
-    padding: 10px;
     cursor: pointer;
     transition: background-color 400ms, color 200ms;
   }
-  span:hover {
+  .like-button {
+    padding: 10px 12px;
+    line-height: 30px;
+    display: flex;
+  }
+  .like-button:hover {
     color: $bar_active;
+  }
+}
+.focusSearch.notebook #bar-nav {
+  .like-button {
+    width: 50px;
+  }
+  .like-button-title {
+    display: none;
   }
 }
 #bar-search {
@@ -210,5 +254,31 @@ button > svg {
   img:hover {
     filter: drop-shadow(2px -1px 0 rgb(0, 127, 255));
   }
+}
+.dropdown {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.dropdown-content {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top:50px;
+  background: var(--bar_bg_3);
+  width: 180px;
+  border-radius: 5px;
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+.dropdown-content span {
+  padding: 4px 12px;
+}
+.dropdown-content a:hover {
+  color: var(--blue);
 }
 </style>
