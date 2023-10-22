@@ -26,6 +26,10 @@ function getList(value) {
 onBeforeMount(() => {
   getList(route.params.tag)
 })
+onBeforeRouteUpdate(async (to, from) => {
+  if (to.params.tag !== from.params.tag)
+    getList(to.params.tag)
+})
 </script>
 
 <template>
