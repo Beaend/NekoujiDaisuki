@@ -25,7 +25,7 @@ class DataService {
     return http.get(`/anime-genres/id=${genre}`)
   }
 
-  get(id) {
+  getAnime(id) {
     return http.get(`/anime/id-${id}`)
   }
 
