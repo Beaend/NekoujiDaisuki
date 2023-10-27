@@ -62,10 +62,14 @@ const cookies = userCookies()
 <template>
   <main>
     <Sorting
+      v-if="anime.length > 1"
       v-model="anime" :raw-data="anime" :settings="cookies.sorting.index"
       :hide-years="true"
     />
     <h2>{{ t(`season.${season}`) }} {{ year }}</h2>
+    <div v-if="anime.length < 1" class="shelf">
+      <CardBlank v-for="l in [1, 2, 3]" :key="l" />
+    </div>
     <div class="shelf">
       <CardAnime v-for="item in anime" :key="item.id" :anime="item" />
     </div>
