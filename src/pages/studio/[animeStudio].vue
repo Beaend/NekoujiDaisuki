@@ -22,6 +22,10 @@ function getList(name) {
 onBeforeMount(() => {
   getList(route.params.animeStudio)
 })
+onBeforeRouteUpdate(async (to, from) => {
+  if (to.params.animeStudio !== from.params.animeStudio)
+    getList(to.params.animeStudio)
+})
 </script>
 
 <template>
