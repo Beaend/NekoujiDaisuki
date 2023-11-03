@@ -47,7 +47,7 @@ onBeforeRouteUpdate(async (to, from) => {
       <CardBlank v-for="i in [1, 2, 3]" :key="i" />
     </div>
     <template v-for="year in sortedYears" :key="year">
-      <h2>{{year}}</h2>
+      <h2>{{ year }}</h2>
       <div v-if="ready" class="shelf">
         <CardAnime
           v-for="item in anime[year]" :key="item.title"
