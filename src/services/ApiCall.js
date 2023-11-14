@@ -25,6 +25,10 @@ class DataService {
     return http.get('/anime/best')
   }
 
+  getAnimeFilms() {
+    return http.get('/anime/films')
+  }
+
   getAnimeSeason(year, season) {
     return http.get(`/anime/${year}/${season}`)
   }
