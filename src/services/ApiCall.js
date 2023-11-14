@@ -17,8 +17,16 @@ class DataService {
     return http.get('/books')
   }
 
-  getYear(year) {
+  getAnimeYear(year) {
     return http.get(`/anime/${year}`)
+  }
+
+  getAnimeBest() {
+    return http.get('/anime/best')
+  }
+
+  getAnimeSeason(year, season) {
+    return http.get(`/anime/${year}/${season}`)
   }
 
   getAnimeGenre(genre) {
@@ -39,6 +47,10 @@ class DataService {
 
   search(text) {
     return http.get(`/search/${text}`)
+  }
+
+  lastSeason() {
+    return http.get('/anime/last-season')
   }
   //
   // create(data) {
