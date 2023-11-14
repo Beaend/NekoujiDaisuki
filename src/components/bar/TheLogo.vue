@@ -16,7 +16,6 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  padding: 0 30px;
   img {
     height: 50px;
     width: 50px;
