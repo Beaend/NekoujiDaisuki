@@ -3,20 +3,14 @@ import { defineStore } from 'pinia'
 export const modalStore = defineStore({
   id: 'modal',
   state: () => ({
-    isOpened: false,
-    windows: {
-      settings: false,
-    },
+    window: '',
   }),
   actions: {
     close() {
-      this.isOpened = false
-      for (const window in this.windows)
-        this.windows[window] = false
+      this.window = ''
     },
     openSettings() {
-      this.isOpened = true
-      this.windows.settings = true
+      this.window = 'Settings'
     },
   },
 })
