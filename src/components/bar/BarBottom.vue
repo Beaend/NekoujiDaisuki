@@ -80,7 +80,7 @@ function reset() {
               <div class="under-select" />
             </div>
             <router-link to="/anime/movie" @click="closeMobile()">
-              {{ t('') }}
+              Фильмы
             </router-link>
           </div>
         </div>
@@ -260,6 +260,10 @@ function reset() {
   font-size: 0.8rem;
   line-height: normal;
 }
+#bar-mobile .mobile-button.router-link-active {
+  cursor: default;
+  color: var(--blue);
+}
 
 /* Style The Dropdown Button */
 
@@ -304,7 +308,6 @@ function reset() {
   margin: 10px;
   width: 20px;
   height: 20px;
-  cursor: pointer;
 }
 .up-list .fixed-search-field > a:hover {
   background: none;
@@ -327,8 +330,8 @@ function reset() {
 }
 .fixed-search-field .input:focus {
   box-shadow: inset 0 0 5px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.4);
-  background: $bar_bg_3;
-  color: $bar_color;
+  background: var(--bar_bg_3);
+  color: var(--bar_color);
 }
 @media only screen and (min-width: 481px) {
   .anime .up-list, #mobile-search .up-list {
