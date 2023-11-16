@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import BarTop from '~/components/bar/BarTop.vue'
-
-// import BarBottom from '~/components/bar/BarBottom.vue'
+import { windowStore } from '~/stores/window'
 
 defineOptions({
   name: 'TheBar',
 })
+
+const window = windowStore()
 </script>
 
 <template>
   <nav>
     <BarTop />
-    <BarBottom />
+    <BarBottom v-if="window.width <= 800" />
   </nav>
 </template>
 
