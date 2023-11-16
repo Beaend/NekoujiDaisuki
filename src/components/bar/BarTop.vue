@@ -112,19 +112,14 @@ function reset() {
 </template>
 
 <style scoped lang="scss">
-$bar_bg: rgb(31,35,39);
-$bar_bg_2: rgb(25, 28, 31);
-$bar_bg_3: rgb(39,43,47);
-$bar_color: rgb(223,223,223);
 $bar_color_hide: rgb(191,199,207);
-$bar_color_2: #becde2;
 $bar_active: rgb(63,127,191);
 
 #bar-top {
   width: 100%;
   height: 130px;
   padding: 20px;
-  color: $bar_color;
+  color: var(--bar_color);
   font-size: 1.1rem;
 }
 #bar-top.mobile {
@@ -152,7 +147,7 @@ $bar_active: rgb(63,127,191);
 .first {
   height: 50px;
   min-width: 50px;
-  background: $bar_bg;
+  background: var(--bar_bg);
   border-radius: 5px;
   transition: 1s;
 }
@@ -226,7 +221,7 @@ button > svg {
       outline: none;
       padding: 8px 40px 9px 15px;
       border-radius: 4px;
-      background: $bar_bg_2;
+      background: var(--bar_bg_2);
       color: $bar_color_hide;
       font: 1.1rem Tahoma, sans-serif;
     }
@@ -249,7 +244,7 @@ button > svg {
 .second {
   height: 40px;
   min-width: 40px;
-  background: $bar_bg;
+  background: var(--bar_bg);
   border-radius: 5px;
   transition: 1s;
 }
