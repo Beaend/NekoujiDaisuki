@@ -37,16 +37,16 @@ export class Sorting {
     return this.data
   }
 
-  byYear() {
+  byYear(reverse: boolean = false) {
     this.data = this.data.sort((a: { [index: string]: any }, b: { [index: string]: any }) => {
       if (a.year > b.year)
-        return 1
+        return reverse ? -1 : 1
       else if (a.year < b.year)
-        return -1
+        return reverse ? 1 : -1
       if (a.season > b.season)
-        return 1
+        return reverse ? -1 : 1
       else if (a.season < b.season)
-        return -1
+        return reverse ? 1 : -1
       return 0
     })
     return this.data
@@ -55,11 +55,7 @@ export class Sorting {
   switchShowQuality(num: number) {
     let nowNum = 0
     for (const el in this.data) {
-      let elQuality = null
-      if (this.data[el].color === '' || this.data[el].color == null)
-        elQuality = 4
-      else
-        elQuality = qualityNums[this.data[el].color]
+      const elQuality = qualityNums[this.data[el].color]
       if (elQuality === num)
         this.data[nowNum].show = !this.data[el].show
       nowNum++
