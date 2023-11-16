@@ -12,8 +12,9 @@ defineOptions({
 const bar = barStore()
 const window = windowStore()
 const modal = modalStore()
-const selectedYear = ref(0)
+const selected = ref(0)
 
+const { t } = useI18n()
 const router = useRouter()
 
 function goTo(url) {
@@ -22,10 +23,14 @@ function goTo(url) {
   else
     router.push(url)
 }
-function resetYear() {
-  selectedYear.value = 0
+
+watch(selected, async () => {
+  await new Promise(resolve => setTimeout(resolve, 200))
+  reset()
+})
+function reset() {
+  selected.value = 0
 }
-const { t } = useI18n()
 </script>
 
 <template>
@@ -40,25 +45,33 @@ const { t } = useI18n()
           </span>
           <span class="dropdown-content">
             <span>
-              <router-link to="/" @click="resetYear">Актуальный сезон</router-link>
+              <router-link to="/" @click="reset">Актуальное</router-link>
             </span>
-            <span class="select-year">
-              <select v-model="selectedYear" class="decorated" @change="goTo(`/anime/year/${selectedYear}`)">
-                <option value="0" disabled>За год</option>
-                <option v-for="year in bar.years" :key="year" :value="year">{{year}}</option>
+            <span>
+              <router-link to="/anime/best" @click="reset">Только топ</router-link>
+            </span>
+            <span class="custom-select">
+              <select v-model="selected" @change="goTo(`/anime/year/${selected}`)">
+                <option value="0" disabled>{{ $t('sorting.byYear') }}</option>
+                <option v-for="year in bar.years" :key="year" :value="year">{{ year }}</option>
               </select>
             </span>
-            <span>Или по жанру:</span>
-            <span class="flex flex-col">
-              <router-link v-for="genre in bar.genres" :key="genre" :to="`/anime/genre/${genre[0]}`" @click="resetYear">{{genre[1]}}</router-link>
+            <span class="custom-select">
+              <select v-model="selected" @change="goTo(`/anime/genre/${selected}`)">
+                <option value="0" disabled>{{ $t('sorting.byGenre') }}</option>
+                <option v-for="genre in bar.genres" :key="genre.id" :value="genre.id">{{ genre[$i18n.locale] }}</option>
+              </select>
+            </span>
+            <span>
+              <router-link to="/anime/movie" @click="reset">Фильмы</router-link>
             </span>
           </span>
         </span>
-        <router-link class="flex like-button" to="/manga" title="Manga">
+        <router-link class="like-button flex" to="/manga" title="Manga">
           <FontAwesomeIcon icon="fa-solid fa-file-image" />
           <span class="like-button-title">{{ t('comics.manga') }}</span>
         </router-link>
-        <router-link class="flex like-button" to="/ranobe" title="Ranobe">
+        <router-link class="like-button flex" to="/ranobe" title="Ranobe">
           <FontAwesomeIcon icon="fa-solid fa-book" />
           <span class="like-button-title">{{ t('ranobe') }}</span>
         </router-link>
@@ -146,35 +159,43 @@ $bar_active: rgb(63,127,191);
 button:hover,
 .like-button:hover {
   cursor: pointer;
+  color: $bar_active;
   > svg {
     color: $bar_active;
   }
 }
+#bar-nav .like-button.router-link-active {
+  cursor: default;
+  color: var(--blue-passive);
+  * {
+    cursor: default;
+  }
+  > svg {
+    color: var(--blue-passive);
+  }
+}
 .first > svg,
 button > svg {
-  transition: .4s;
+  transition: .2s;
   width: 30px;
   height: 30px;
   margin: 10px;
 }
 #bar-nav {
   display: flex;
+  margin-left: 30px !important;
+  user-select: none;
   svg {
-    transition: .2s;
+    transition: color 200ms;
     height: 30px;
-    margin: 0 5px;
-  }
-  span {
-    cursor: pointer;
-    transition: background-color 400ms, color 200ms;
+    margin: 0 5px 0 0;
   }
   .like-button {
-    padding: 10px 12px;
+    padding: 10px;
     line-height: 30px;
     display: flex;
-  }
-  .like-button:hover {
-    color: $bar_active;
+    cursor: pointer;
+    transition: color 200ms;
   }
 }
 .focusSearch.notebook #bar-nav {
@@ -268,7 +289,6 @@ button > svg {
   left: 0;
   top:50px;
   background: var(--bar_bg_3);
-  width: 180px;
   border-radius: 5px;
   z-index: 1;
 }
@@ -276,9 +296,63 @@ button > svg {
   display: flex;
 }
 .dropdown-content span {
+  min-width: 160px;
   padding: 4px 12px;
 }
 .dropdown-content a:hover {
   color: var(--blue);
+}
+.dropdown-content .router-link-active {
+  color: var(--blue-passive);
+}
+.dropdown-content .router-link-active:hover {
+  color: var(--blue-passive);
+  cursor: default;
+}
+.select-selected {
+  background-color: DodgerBlue;
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--bar_bg);
+  border: none;
+  width: 150px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  padding: 4px 3px 4px 7px;
+}
+.custom-select {
+  position: relative;
+}
+
+.custom-select::before,
+.custom-select::after {
+  --size: 4px;
+  content: "";
+  position: absolute;
+  right: 1rem;
+  pointer-events: none;
+}
+
+.custom-select::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid rgb(223,223,223);
+  top: 40%;
+}
+
+.custom-select::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid rgb(223,223,223);
+  top: 55%;
+}
+.custom-select:hover::before {
+  border-bottom: var(--size) solid var(--blue);
+}
+.custom-select:hover::after {
+  border-top: var(--size) solid var(--blue);
 }
 </style>
