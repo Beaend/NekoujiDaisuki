@@ -5,6 +5,7 @@ export const windowStore = defineStore({
   state: () => ({
     width: 0,
     height: 0,
+    backgroundUrl: null,
   }),
   getters: {
     getBarType(): string {
