@@ -8,15 +8,25 @@ defineOptions({
 
 const props = defineProps({
   rawData: Array,
-  settings: Object<string>,
   hideYears: Boolean,
 })
-const emit = defineEmits(['update:rawData'])
 
+const emit = defineEmits(['update:rawData'])
+const settings = ref({
+  sort: 'name',
+  param: 'title',
+  reverse: false,
+  show: {
+    1: true,
+    2: true,
+    3: true,
+    4: true,
+  },
+})
 const sorting = new SortingTs(props.rawData)
 
 function sort(key, param = null) {
-  const local: object[string] = props.settings
+  const local: object[string] = settings.value
   if (local.sort === key) {
     if (param === null || local.param === param) {
       sorting.reverse()
@@ -41,7 +51,7 @@ function sort(key, param = null) {
 }
 function switchShowQuality(number) {
   sorting.switchShowQuality(number)
-  const local: object[number] = props.settings
+  const local: object[number] = settings.value
   local.show[number] = !local.show[number]
 }
 </script>
@@ -50,7 +60,7 @@ function switchShowQuality(number) {
   <div id="sort">
     <div class="dropdown">
       <span>
-        {{ $t('sorting') }}
+        {{ $t('sorting.text') }}
         <FontAwesomeIcon icon="fa-solid fa-angle-down" />
       </span>
       <div class="dropdown-content" :class="{ reverse: settings.reverse }">
