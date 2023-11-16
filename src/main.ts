@@ -3,7 +3,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faAngleDown, faAngleUp, faBook, faCalendar, faCalendarAlt, faCircleCheck, faCog, faFileImage, faSearch, faSquare, faSquareCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleUp, faBook, faCalendar, faCalendarAlt, faCircleCheck, faCog, faDroplet, faFileImage, faLeaf, faSearch, faSnowflake, faSquare, faSquareCheck, faSun, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faCircleCheck as farCircleCheck } from '@fortawesome/free-regular-svg-icons'
 
 // import Previewer from 'virtual:vue-component-preview'
@@ -18,7 +18,7 @@ import 'uno.css'
 const routes = setupLayouts(generatedRoutes)
 
 library.add(faCalendar, faSearch, faXmark, faBook, faCalendarAlt, faFileImage, faCog, faCircleCheck,
-  farCircleCheck, faAngleDown, faAngleUp, faSquare, faSquareCheck)
+  farCircleCheck, faAngleDown, faAngleUp, faSquare, faSquareCheck, faSnowflake, faSun, faLeaf, faDroplet)
 
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
