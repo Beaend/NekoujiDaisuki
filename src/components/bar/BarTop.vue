@@ -309,9 +309,6 @@ button > svg {
   color: var(--blue-passive);
   cursor: default;
 }
-.select-selected {
-  background-color: DodgerBlue;
-}
 select {
   appearance: none;
   -webkit-appearance: none;
