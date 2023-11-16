@@ -17,7 +17,7 @@ class DataService {
     return http.get('/books')
   }
 
-  getAnimeYear(year) {
+  getAnimeByYear(year: number) {
     return http.get(`/anime/${year}`)
   }
 
@@ -25,31 +25,31 @@ class DataService {
     return http.get('/anime/best')
   }
 
-  getAnimeFilms() {
-    return http.get('/anime/films')
+  getAnimeByType(animeType: string) {
+    return http.get(`/anime/type=${animeType}`)
   }
 
-  getAnimeSeason(year, season) {
+  getAnimeSeason(year: number, season: number) {
     return http.get(`/anime/${year}/${season}`)
   }
 
-  getAnimeGenre(genre) {
+  getAnimeGenre(genre: string) {
     return http.get(`/anime-genres/id=${genre}`)
   }
 
-  getAnime(id) {
+  getAnime(id: number) {
     return http.get(`/anime/id-${id}`)
   }
 
-  tag(text) {
+  tag(text: string) {
     return http.get(`/tag/${text}`)
   }
 
-  studio(name) {
+  studio(name: string) {
     return http.get(`/studio/${name}`)
   }
 
-  search(text) {
+  search(text: string) {
     return http.get(`/search/${text}`)
   }
 
