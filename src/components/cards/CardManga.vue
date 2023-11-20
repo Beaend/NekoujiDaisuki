@@ -88,7 +88,7 @@ function copyTitle() {
             <div class="tooltip">Количество глав</div>
           </div>
           <div class="isEnded">
-            {{ manga.isEnded ? "Законченно" : "Продолжается" }}
+            {{ manga.is_ended ? "Законченно" : "Продолжается" }}
             <div class="tooltip">Выпуск</div>
           </div>
         </div>
