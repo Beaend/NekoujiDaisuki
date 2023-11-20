@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import Sorting from '~/components/Sorting.vue'
 import Api from '~/services/ApiCall.js'
-import { userCookies } from '~/stores/cookies'
+import { Sorting } from '~/services/Sorting'
 
 defineOptions({
   name: 'TagPage',
@@ -12,23 +11,27 @@ const route = useRoute()
 const anime = ref([])
 const manga = ref([])
 const books = ref([])
-const cookies = userCookies()
 
-function getList(value) {
-  Api.tag(value)
+async function getList(value) {
+  await Api.tag(value)
     .then((response) => {
       anime.value = response.data.anime
       manga.value = response.data.manga
       books.value = response.data.books
     })
+  if (anime.value) {
+    const sort = new Sorting(anime.value)
+    sort.byName('title')
+    sort.byYear(true)
+  }
 }
 
-onBeforeMount(() => {
-  getList(route.params.tag)
+onBeforeMount(async () => {
+  await getList(route.params.tag)
 })
 onBeforeRouteUpdate(async (to, from) => {
   if (to.params.tag !== from.params.tag)
-    getList(to.params.tag)
+    await getList(to.params.tag)
 })
 </script>
 
@@ -38,10 +41,6 @@ onBeforeRouteUpdate(async (to, from) => {
     <h2 v-if="anime.length > 0">
       {{ $t('anime') }}
     </h2>
-    <Sorting
-      v-if="anime.length > 0"
-      v-model="anime" :raw-data="anime" :settings="cookies.sorting.index"
-    />
     <div v-if="anime.length > 0" class="shelf">
       <CardAnime
         v-for="item in anime" :key="item.title"
@@ -51,10 +50,6 @@ onBeforeRouteUpdate(async (to, from) => {
     <h2 v-if="manga.length > 0">
       {{ $t('comics.manga') }}
     </h2>
-    <Sorting
-      v-if="manga.length > 0"
-      v-model="manga" :raw-data="manga" :settings="cookies.sorting.index"
-    />
     <div v-if="manga.length > 0" class="shelf">
       <CardManga
         v-for="item in manga" :key="item.title"
@@ -64,10 +59,6 @@ onBeforeRouteUpdate(async (to, from) => {
     <h2 v-if="books.length > 0">
       {{ $t('ranobe') }}
     </h2>
-    <Sorting
-      v-if="books.length > 0"
-      v-model="books" :raw-data="books" :settings="cookies.sorting.index"
-    />
     <div v-if="books.length > 0" class="shelf">
       <CardRanobe
         v-for="item in books" :key="item.title"
