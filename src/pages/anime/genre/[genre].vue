@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import Sorting from '~/components/Sorting.vue'
 import Api from '~/services/ApiCall.js'
-import { userCookies } from '~/stores/cookies'
+import { Sorting } from '~/services/Sorting'
 
 defineOptions({
   name: 'AnimeByGenre',
@@ -13,14 +12,19 @@ const route = useRoute()
 const anime = ref([])
 const genre = ref(String)
 const genres = ref([])
+const loading = ref(true)
 
-function getAnimeByGenre(genre) {
-  Api.getAnimeGenre(genre)
+async function getAnimeByGenre(genre) {
+  await Api.getAnimeGenre(genre)
     .then((response) => {
-      anime.value = []
       anime.value.push(...response.data[0])
       anime.value.push(...response.data[1])
     })
+  const sort = new Sorting(anime.value)
+  sort.byName('title')
+  sort.byQuality()
+  sort.byYear(true)
+  loading.value = false
 }
 async function getGenres() {
   await Api.getGenres()
@@ -37,19 +41,19 @@ function getGenreName(genreName) {
 }
 
 onBeforeMount(async () => {
-  getAnimeByGenre(route.params.genre)
+  await getAnimeByGenre(route.params.genre)
   await getGenres()
   getGenreName(route.params.genre)
 })
 
 onBeforeRouteUpdate(async (to, from) => {
   if (to.params.genre !== from.params.genre) {
-    getAnimeByGenre(to.params.genre)
+    anime.value = []
+    loading.value = true
+    await getAnimeByGenre(to.params.genre)
     getGenreName(to.params.genre)
   }
 })
-
-const cookies = userCookies()
 </script>
 
 <template>
@@ -68,9 +72,9 @@ const cookies = userCookies()
         </div>
       </span>
     </h1>
-    <Sorting
-      v-model="anime" :raw-data="anime" :settings="cookies.sorting.index"
-    />
+    <div v-if="loading" class="shelf">
+      <CardBlank v-for="l in [1, 2, 3]" :key="l" />
+    </div>
     <div class="shelf">
       <CardAnime v-for="item in anime" :key="item.id" :anime="item" />
     </div>
