@@ -1,7 +1,7 @@
 <script setup>
-import { windowStore } from '~/stores/window'
+import { displayStore } from '~/stores/display'
 
-const window = windowStore()
+const display = displayStore()
 </script>
 
 <template>
@@ -10,7 +10,7 @@ const window = windowStore()
   >
     <div
       class="page-wrapper-image"
-      :style="{ backgroundImage: `url(${window.backgroundUrl})` }"
+      :style="{ backgroundImage: `url(${display.backgroundUrl})` }"
     />
     <RouterView />
     <TheFooter />
