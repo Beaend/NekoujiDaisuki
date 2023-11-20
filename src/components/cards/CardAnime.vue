@@ -114,7 +114,7 @@ onBeforeMount(() => {
             <div class="tooltip">Количество серий</div>
           </div>
           <div class="season">
-            <template v-if="1 <= anime.season <= 4">
+            <template v-if="anime.season > 0 && anime.season <= 4">
               {{ t(`season.${anime.season}`) }}
             </template>
             {{ anime.year }}
