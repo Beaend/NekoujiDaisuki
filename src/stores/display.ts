@@ -1,21 +1,25 @@
 import { defineStore } from 'pinia'
 
-export const windowStore = defineStore({
-  id: 'window',
+export const displayStore = defineStore({
+  id: 'display',
   state: () => ({
-    width: 0,
-    height: 0,
+    window: {
+      width: 0,
+      height: 0,
+    },
     backgroundUrl: null,
+    isTouch: false,
+    mousePosition: [],
   }),
   getters: {
     getBarType(): string {
-      if (this.width > 800)
+      if (this.window.width > 800)
         return 'top'
       else
         return 'bottom'
     },
     getDeviceType(): string {
-      const screenWidth: number = this.width
+      const screenWidth: number = this.window.width
       let deviceType: string = 'unknown'
       if (screenWidth <= 380)
         deviceType = 'tiny'
