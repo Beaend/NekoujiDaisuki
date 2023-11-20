@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Sorting from '~/components/Sorting.vue'
+import SortingComponent from '~/components/SortingComponent.vue'
 import Api from '~/services/ApiCall.js'
-import { userCookies } from '~/stores/cookies'
+import { Sorting } from '~/services/Sorting'
 
 defineOptions({
   name: 'SearchPage',
@@ -12,35 +12,43 @@ const route = useRoute()
 const anime = ref([])
 const manga = ref([])
 const books = ref([])
-const cookies = userCookies()
+const loading = ref(true)
 
-function getList(value) {
-  Api.search(value)
+async function getList(value) {
+  await Api.search(value)
     .then((response) => {
       anime.value = response.data.anime
       manga.value = response.data.manga
       books.value = response.data.books
     })
+  const sort = new Sorting(anime.value)
+  sort.byName('title')
+  loading.value = false
 }
 
-onBeforeMount(() => {
-  getList(route.params.searchValue)
+onBeforeMount(async () => {
+  await getList(route.params.searchValue)
 })
 onBeforeRouteUpdate(async (to, from) => {
-  if (to.params.searchValue !== from.params.searchValue)
-    getList(to.params.searchValue)
+  if (to.params.searchValue !== from.params.searchValue) {
+    loading.value = true
+    await getList(to.params.searchValue)
+  }
 })
 </script>
 
 <template>
   <main>
     <h1>{{ $t('search') }}: {{ route.params.searchValue }}</h1>
+    <div v-if="loading" class="shelf">
+      <CardBlank v-for="i in [1, 2, 3, 4, 5]" :key="i" />
+    </div>
     <h2 v-if="anime.length > 0">
       {{ $t('anime') }}
     </h2>
-    <Sorting
+    <SortingComponent
       v-if="anime.length > 0"
-      v-model="anime" :raw-data="anime" :settings="cookies.sorting.index"
+      v-model="anime" :raw-data="anime"
     />
     <div v-if="anime.length > 0" class="shelf">
       <CardAnime
@@ -51,9 +59,9 @@ onBeforeRouteUpdate(async (to, from) => {
     <h2 v-if="manga.length > 0">
       {{ $t('comics.manga') }}
     </h2>
-    <Sorting
+    <SortingComponent
       v-if="manga.length > 0"
-      v-model="manga" :raw-data="manga" :settings="cookies.sorting.index"
+      v-model="manga" :raw-data="manga"
     />
     <div v-if="manga.length > 0" class="shelf">
       <CardManga
@@ -64,9 +72,9 @@ onBeforeRouteUpdate(async (to, from) => {
     <h2 v-if="books.length > 0">
       {{ $t('ranobe') }}
     </h2>
-    <Sorting
+    <SortingComponent
       v-if="books.length > 0"
-      v-model="books" :raw-data="books" :settings="cookies.sorting.index"
+      v-model="books" :raw-data="books"
     />
     <div v-if="books.length > 0" class="shelf">
       <CardRanobe
