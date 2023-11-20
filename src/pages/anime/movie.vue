@@ -11,23 +11,19 @@ const { t } = useI18n()
 const anime = ref(null)
 const loading = ref(true)
 
-function getAnime() {
-  Api.getAnimeByType('movie')
+async function getAnime() {
+  await Api.getAnimeByType('Movie')
     .then((response) => {
       anime.value = response.data
       const sort = new Sorting(anime.value)
       sort.byName('title')
       sort.byYear(true)
     })
-}
-
-async function floading() {
-  await new Promise(resolve => setTimeout(resolve, 500))
   loading.value = false
 }
+
 onBeforeMount(async () => {
   await getAnime()
-  await floading()
 })
 </script>
 
@@ -38,8 +34,8 @@ onBeforeMount(async () => {
       <CardBlank v-for="l in [1, 2, 3]" :key="l" />
     </div>
     <div v-if="anime && !loading" class="shelf">
-      <template v-for="item in anime">
-        <CardAnime v-if="item.type.toLowerCase() === 'film'" :key="item.id" :anime="item" />
+      <template v-for="item in anime" :key="item.id">
+        <CardAnime :anime="item" />
       </template>
     </div>
   </main>
