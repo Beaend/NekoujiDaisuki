@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Api from '~/services/ApiCall.js'
+import { Sorting } from '~/services/Sorting.ts'
 
 defineOptions({
   name: 'IndexPage',
@@ -36,12 +37,17 @@ async function getActualSeason() {
     }
   }
 }
-function getAnime() {
+async function getAnime() {
   for (const i in seasons.value) {
-    Api.getAnimeSeason(seasons.value[i].year, seasons.value[i].season)
+    await Api.getAnimeSeason(seasons.value[i].year, seasons.value[i].season)
       .then((response) => {
         anime.value[seasons.value[i].season] = response.data
       })
+  }
+  for (const a in anime.value) {
+    const sort = new Sorting(anime.value[a])
+    sort.byName('title')
+    sort.byQuality()
   }
 }
 function takeSeasonYear(x) {
@@ -73,11 +79,11 @@ onBeforeMount(async () => {
         </span>
       </div>
     </div>
-    <Sorting
+    <SortingComponent
       v-if="selectedSeason === 0" :hide-years="true"
     />
     <template v-for="i in [1, 2, 3, 4]">
-      <Sorting
+      <SortingComponent
         v-if="selectedSeason === i && anime[selectedSeason]" :key="i"
         v-model="anime[i]" :raw-data="anime[i]"
         :hide-years="true"
