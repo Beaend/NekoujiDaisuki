@@ -21,32 +21,17 @@ export class Sorting {
 
   byQuality() {
     this.data = this.data.sort((a: { [index: string]: any }, b: { [index: string]: any }) => {
-      const qualityA: number = qualityNums[a.color]
-      const qualityB: number = qualityNums[b.color]
-      if (qualityA < qualityB)
-        return -1
-      else if (qualityB < qualityA)
-        return 1
-      return 0
+      return qualityNums[a.color] - qualityNums[b.color]
     })
-    return this.data
-  }
-
-  reverse() {
-    this.data = this.data.reverse()
     return this.data
   }
 
   byYear(reverse: boolean = false) {
     this.data = this.data.sort((a: { [index: string]: any }, b: { [index: string]: any }) => {
-      if (a.year > b.year)
-        return reverse ? -1 : 1
-      else if (a.year < b.year)
-        return reverse ? 1 : -1
-      if (a.season > b.season)
-        return reverse ? -1 : 1
-      else if (a.season < b.season)
-        return reverse ? 1 : -1
+      if (a.year !== b.year)
+        return (a.year - b.year) * (reverse ? -1 : 1)
+      if (a.season !== b.season)
+        return (a.season - b.season) * (reverse ? -1 : 1)
       return 0
     })
     return this.data
