@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import TheLogo from '~/components/bar/TheLogo.vue'
 import { barStore } from '~/stores/bar'
-import { windowStore } from '~/stores/window'
+import { displayStore } from '~/stores/display'
 import { modalStore } from '~/stores/modals'
 
 defineOptions({
@@ -10,7 +10,7 @@ defineOptions({
 })
 
 const bar = barStore()
-const window = windowStore()
+const display = displayStore()
 const modal = modalStore()
 const selected = ref(0)
 
@@ -34,7 +34,7 @@ function reset() {
 </script>
 
 <template>
-  <div id="bar-top" :class="{ focusSearch: bar.searchFocused, mobile: window.getBarType === 'bottom', [window.getDeviceType]: window.getDeviceType }">
+  <div id="bar-top" :class="{ focusSearch: bar.searchFocused, mobile: display.getBarType === 'bottom', [display.getDeviceType]: display.getDeviceType }">
     <div id="bar-top-first">
       <TheLogo />
       <div id="bar-nav" class="first">
