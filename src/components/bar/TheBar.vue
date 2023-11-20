@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { windowStore } from '~/stores/window'
+import { displayStore } from '~/stores/display'
 
 defineOptions({
   name: 'TheBar',
 })
 
-const window = windowStore()
+const display = displayStore()
 </script>
 
 <template>
   <nav>
     <BarTop />
-    <BarBottom v-if="window.width <= 800" />
+    <BarBottom v-if="display.window.width <= 800" />
   </nav>
 </template>
 
