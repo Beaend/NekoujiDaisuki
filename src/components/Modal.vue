@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { windowStore } from '~/stores/window'
+import { displayStore } from '~/stores/display'
 import { modalStore } from '~/stores/modals'
 
 const props = defineProps({
   window: null,
   text: null,
 })
-const window = windowStore()
+const display = displayStore()
 const modal = modalStore()
 </script>
 
 <template>
-  <div class="wrapper" :class="{ hidden: !modal.windows[props.window] }" @click.self="modal.close()">
-    <div class="modal" :class="window.getDeviceType" @click.self="modal.close()">
+  <div class="wrapper" :class="{ hidden: modal.window === '' }" @click.self="modal.close()">
+    <div class="modal" :class="display.getDeviceType" @click.self="modal.close()">
       <div v-if="text" class="above">
         <div class="text">
           {{ text }}
         </div>
-        <div v-if="window.getDeviceType === 'tiny' || window.getDeviceType === 'smartphone'" class="close">
+        <div v-if="display.getDeviceType === 'tiny' || display.getDeviceType === 'smartphone'" class="close">
           <FontAwesomeIcon
             icon="fa-solid fa-xmark"
             @click="modal.close()"
@@ -94,7 +94,7 @@ const modal = modalStore()
     width: 50px;
   }
 }
-svg {
+.modal svg {
   height: 32px;
   width: 32px;
   cursor: pointer;
