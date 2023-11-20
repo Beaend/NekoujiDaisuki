@@ -2,11 +2,11 @@
 </script>
 
 <template>
-  <div class="card">
-    <div class="left">
+  <div class="card blankCard">
+    <div class="card-left">
       <img src="/img/loading%20a4.png" :alt="$t('loadingPage')">
     </div>
-    <div class="right">
+    <div class="card-right">
       <div class="title blankText" />
       <div class="description blankText" />
       <div class="description blankText" />
@@ -17,7 +17,7 @@
 </template>
 
 <style scoped>
-.left {
+.blankCard .card-left {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: bg_gradient 10s ease infinite;
@@ -36,7 +36,7 @@
   }
 }
 
-.right {
+.blankCard .card-right {
   padding: 20px;
   .title {
     width: 80%;
@@ -53,7 +53,7 @@
   }
 }
 
-.blankText {
+.blankCard .blankText {
   background: linear-gradient(-135deg, rgb(31,33,35), rgb(63,67,71), rgb(127,133,139), rgb(63,67,71));
   background-size: 400% 400%;
   animation: text_gradient 10s ease infinite;
