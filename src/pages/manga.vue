@@ -33,7 +33,7 @@ onMounted(() => {
 <template>
   <main>
     <h2>{{ t('comics.manga') }}</h2>
-    <div v-if="manga === []" class="shelf">
+    <div v-if="manga.length < 1" class="shelf">
       <CardBlank v-for="l in [1, 2, 3]" :key="l" />
     </div>
     <div id="manga" class="shelf">
