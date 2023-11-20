@@ -14,10 +14,6 @@ async function toggleLocales() {
 
 <template>
   <nav flex="~ gap-4" mt-6 justify-center text-xl>
-    <button icon-btn :title="t('button.toggle_dark')" @click="toggleDark()">
-      <div i="carbon-sun dark:carbon-moon" />
-    </button>
-
     <a icon-btn :title="t('button.toggle_langs')" @click="toggleLocales()">
       <div i-carbon-language />
     </a>
