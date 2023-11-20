@@ -15,6 +15,21 @@ season:
   2: Весна
   3: Лето
   4: Осень
+anime-type:
+  text: Тип
+  tv: Сериал
+  film: Фильм
+  short: Мини-сериал
+  tv-s: Сериалы
+  film-s: Фильмы
+anime-original:
+  text: Оригинал
+  original: Оригинальное
+  manga: Манга
+  manhua: Китайская Маньхуа
+  manhwa: Корейская Манхва
+  comics: Комикс
+  light novel: Книга
 quality:
   text: Качество
   anime:
@@ -51,3 +66,11 @@ settings:
     en: Английский
   title_ru: Название на русском
   comments: Комментарии
+loadingPage: Загрузка страницы
+sorting:
+  text: сортировка
+  byYear: по годам
+  byGenre: по жанру
+show: отображение
+studio: Студия
+add-tag: Добавить тег

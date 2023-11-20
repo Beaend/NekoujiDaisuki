@@ -8,13 +8,28 @@ button:
 not-found: Not found
 search: Search
 anime: Anime
-airing: Airing
 ranobe: Ranobe
+airing: Airing
 season:
   1: Winter
   2: Spring
   3: Summer
   4: Fall
+anime-type:
+  text: Type
+  tv: TV
+  film: Movie
+  short: TV-Short
+  tv-s: Serials
+  film-s: Films
+anime-original:
+  text: Original
+  original: Original
+  manga: Manga
+  manhua: Chinese Manhua
+  manhwa: Korean Manhwa
+  comics: Comics
+  light novel: Book
 quality:
   text: Quality
   anime:
@@ -38,3 +53,24 @@ comics:
   manga: Manga
   manhua: Chinese Manhua
   manhwa: Korean Manhwa
+settings:
+  text: Settings
+  theme: Theme
+  themes:
+    dark: Dark
+    light: Light
+  title: Titles
+  titles:
+    romanji: Romangi
+    original: Original
+    en: English
+  title_ru: Russian name
+  comments: Comments
+loadingPage: loading page
+sorting:
+  text: sorting
+  byYear: by year
+  byGenre: by genre
+show: showing
+studio: Studio
+add-tag: Add tag
