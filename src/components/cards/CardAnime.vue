@@ -19,13 +19,6 @@ const titleUrl = ref(null)
 const overQuality = ref(false)
 const overMouseText = ref('')
 
-function qualityJoin() {
-  overQuality.value = true
-}
-function qualityLeave() {
-  overQuality.value = false
-}
-
 function getTitleUrl() {
   if (cookies.baseAnimeUrlSite)
     titleUrl.value = props.anime.urls[cookies.baseAnimeUrlSite] || null
@@ -63,7 +56,7 @@ onBeforeMount(() => {
     <div v-if="overMouseText" :style="followBlock" class="followBlock">{{ overMouseText }}</div>
     <div class="card-left">
       <div class="image" :style="`background-image: url(${anime.image})`">
-        <div class="quality" :class="{ over: overQuality }" @mouseover="qualityJoin()" @mouseleave="qualityLeave()">
+        <div class="quality" :class="{ over: overQuality }" @mouseover="overQuality = true" @mouseleave="overQuality = false">
           <div class="quality-icon">
             <FontAwesomeIcon icon="fa-solid fa-calendar" class="quality-color" />
           </div>
@@ -72,8 +65,8 @@ onBeforeMount(() => {
             {{ t('quality.text') }}: {{ t(`quality.anime.${anime.color}`) }}
             <br>
             {{ t('anime-type.text') }}: {{ t(`anime-type.${anime.type.toLowerCase()}`) }}
-            <div class="urls">
-              <a :href="anime.urls.myanimelist" title="MyAnimeList"><img src="/img/myanimelist.png" alt="MyAnimeList"></a>
+            <div v-if="anime.urls" class="urls">
+              <a v-if="anime.urls.myanimelist" :href="anime.urls.myanimelist" title="MyAnimeList"><img src="/img/myanimelist.png" alt="MyAnimeList"></a>
             </div>
           </div>
         </div>
@@ -109,6 +102,7 @@ onBeforeMount(() => {
             {{ line }}
           </p>
         </div>
+        <div class="space"/>
         <hr>
         <div class="eth">
           <div class="source">
@@ -341,6 +335,11 @@ onBeforeMount(() => {
     color: $item_color_sub;
     cursor: default;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    .space {
+      flex-grow: 1;
+    }
     .description {
       transition: color 0.1s;
     }
@@ -357,17 +356,16 @@ onBeforeMount(() => {
     .eth {
       display: flex;
       justify-content: space-evenly;
-      .source, .duration, .author, .season {
+      .source, .duration, .author, .season, .isEnded {
         position: relative;
         padding: 4px;
         text-align: center;
-        flex-grow: 1;
         cursor: help;
+        font-weight: bold;
       }
     }
   }
   .card .tooltip {
-    visibility: hidden;
     width: 100px;
     background-color: black;
     color: #fff;
@@ -375,16 +373,15 @@ onBeforeMount(() => {
     border-radius: 6px;
     padding: 5px 0;
 
-    /* Position the tooltip */
     position: absolute;
     z-index: 1;
-
-    top: 100%;
+    bottom: 100%;
     left: 50%;
     margin-left: -50px;
+    display: none;
   }
-  .source:hover .tooltip, .duration:hover .tooltip, .season:hover .tooltip, .author:hover .tooltip {
-    visibility: visible;
+  .eth *:hover .tooltip{
+    display: block;
   }
   .card-right .right-footer {
     bottom: 0;
@@ -470,8 +467,8 @@ onBeforeMount(() => {
   }
 
   .card ::-webkit-scrollbar-button {
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
   }
 
   .card ::-webkit-scrollbar-thumb {
@@ -495,8 +492,8 @@ onBeforeMount(() => {
   }
 
   .card ::-webkit-scrollbar-button {
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
   }
 
   .card ::-webkit-scrollbar-thumb {
