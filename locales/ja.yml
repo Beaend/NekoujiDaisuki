@@ -5,9 +5,72 @@ button:
   home: ホーム
   toggle_dark: ダークモード切り替え
   toggle_langs: 言語切り替え
-intro:
-  desc: 固執された Vite スターターテンプレート
-  dynamic-route: 動的ルートのデモ
-  hi: こんにちは、{name}!
-  whats-your-name: 君の名は。
 not-found: 見つかりませんでした
+search: 検索
+anime: アニメ
+ranobe: ラノベ
+airing:  放送中 (ほうそうちゅう)
+season:
+  1: 冬
+  2: 春
+  3: 夏
+  4: 秋
+anime-type:
+  text: タイプ
+  tv: TV
+  film: 映画
+  short: TV-Short
+  tv-s: Serials
+  film-s: Films
+anime-original:
+  text:  オリジナル
+  original:  オリジナル
+  manga: 漫画
+  manhua: 中国漫画
+  manhwa: 韓国の漫画
+  comics: コミックス
+  light novel: ライトノベル
+quality:
+  text: 品質
+  anime:
+    base: Watchable
+    green: Good
+    lblue: Cool
+    gold: Best(in season at least)
+    red: Unwatched/not recommend
+  manga:
+    base: Readable
+    green: Good
+    lblue: Cool
+    gold: Best
+  ranobe:
+    base: Readable
+    green: Good
+    lblue: Cool
+    gold: Best
+comics:
+  en: コミックス
+  manga: 漫画
+  manhua: 中国漫画
+  manhwa: 韓国の漫画
+settings:
+  text: 設定
+  theme: テーマ
+  themes:
+    dark: ダーク
+    light: ライト
+  title: タイトル
+  titles:
+    romanji: ローマ字
+    original: オリジナル
+    en: 英語
+  title_ru: ロシア語の名前
+  comments: コメント
+loadingPage: ページを読み込んでいます
+sorting:
+  text: ソート
+  byYear: 年ごとに
+  byGenre: ジャンル別に
+show: 表示中
+studio: スタジオ
+add-tag: タグを追加する
