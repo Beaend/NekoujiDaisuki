@@ -5,10 +5,72 @@ button:
   home: 首页
   toggle_dark: 切换深色模式
   toggle_langs: 切换语言
-intro:
-  desc: 固执己见的 Vite 项目模板
-  dynamic-route: 动态路由演示
-  hi: 你好，{name}
-  aka: 也叫
-  whats-your-name: 输入你的名字
 not-found: 未找到页面
+search: 搜索
+anime: 动漫
+ranobe: 轻小说
+airing: 播出中
+season:
+  1: 冬季
+  2: 春季
+  3: 夏季
+  4: 秋季
+anime-type:
+  text: 类型
+  tv: TV
+  film: Movie
+  short: TV-Short
+  tv-s: Serials
+  film-s: Films
+anime-original:
+  text: 原创
+  original: 原创
+  manga: 漫画 (JP)
+  manhua: 漫画
+  manhwa: 漫画 (KO)
+  comics:  漫画书
+  light novel: 轻小说
+quality:
+  text: 质量
+  anime:
+    base: Watchable
+    green: Good
+    lblue: Cool
+    gold: Best(in season at least)
+    red: Unwatched/not recommend
+  manga:
+    base: Readable
+    green: Good
+    lblue: Cool
+    gold: Best
+  ranobe:
+    base: Readable
+    green: Good
+    lblue: Cool
+    gold: Best
+comics:
+  comics: 漫画书
+  manga: 漫画 (JP)
+  manhua: 漫画
+  manhwa: 漫画 (KO)
+settings:
+  text: 设置
+  theme: 主题
+  themes:
+    dark: 暗
+    light: 亮
+  title: 标题
+  titles:
+    romanji: Romanji
+    original: Original
+    en: English
+  title_ru: Russian name
+  comments: 评论
+loadingPage: 加载页面
+sorting:
+  text: 排序
+  byYear: 按年份排序
+  byGenre: 按流派排序
+show: 显示中
+studio: 工作室
+add-tag:  添加标签
