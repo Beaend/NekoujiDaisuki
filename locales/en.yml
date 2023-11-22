@@ -61,7 +61,7 @@ settings:
     light: Light
   title: Titles
   titles:
-    romanji: Romangi
+    romanji: Romanji
     original: Original
     en: English
   title_ru: Russian name
