@@ -181,9 +181,6 @@ onBeforeMount(() => {
       flex-grow: 1;
       max-width: 555px;
     }
-    .card-right {
-      flex-grow: 1;
-    }
   }
 
   .card-left {
@@ -191,6 +188,7 @@ onBeforeMount(() => {
     height: 100%;
     width: 185px;
     position: relative;
+    flex-shrink: 0;
   }
 
   .card-left .image {
@@ -198,8 +196,8 @@ onBeforeMount(() => {
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    height: $height;
-    width: $image_width;
+    height: 100%;
+    width: 100%;
     position: relative;
     border-radius: 4px 0 0 4px;
   }
@@ -407,6 +405,43 @@ onBeforeMount(() => {
     border-radius: 4px;
     height: 24px;
     line-height: 20px;
+  }
+  // for tiny mobile
+  @media only screen and (max-width: 380px) {
+    .card {
+      width: 100%;
+      height: 230px;
+      margin: 10px 0;
+    }
+    .card-left {
+      width: 150px;
+    }
+  }
+  // for mobile
+  @media only screen and (min-width: 381px) and (max-width: 480px) {
+    .card {
+      width: 100%;
+      max-width: 480px;
+      height: 230px;
+      margin: 10px 5px;
+    }
+    .card-left {
+      width: 150px;
+    }
+    .card-right {
+      flex-grow: 1;
+    }
+  }
+  // for tablet
+  @media screen and (min-width: 481px) and (max-width: 800px) {
+    .card {
+      width: 100%;
+      max-width: 750px;
+      margin: 15px;
+    }
+    .card-right {
+      flex-grow: 1;
+    }
   }
   .genre {
     background: rgb(31,48,63);

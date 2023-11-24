@@ -4,7 +4,7 @@
 <template>
   <div class="card blankCard">
     <div class="card-left">
-      <img src="/img/loading%20a4.png" :alt="$t('loadingPage')">
+      <img src="/img/loading_a4.png" :alt="$t('loadingPage')">
     </div>
     <div class="card-right">
       <div class="title blankText" />
