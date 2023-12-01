@@ -56,6 +56,9 @@ class DataService {
   lastSeason() {
     return http.get('/anime/last-season')
   }
+  info() {
+    return http.get('info')
+  }
 }
 
 export default new DataService()
