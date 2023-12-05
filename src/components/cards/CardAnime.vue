@@ -123,13 +123,17 @@ onBeforeMount(() => {
         </div>
       </div>
       <hr>
-      <div class="right-footer">
-        <span v-for="genre in anime.genres[0]" :key="genre.id" class="genre" :class="`genre-${genre.id}`">
-          <router-link :to="`/anime/genre/${genre.id}`">{{ genre[$i18n.locale] }}</router-link>
-        </span>
-        <span v-for="genre in anime.genres[1]" :key="genre.id" class="sub-genre" :class="`genre-${genre.id}`">
-          <router-link :to="`/anime/genre/${genre.id}`">{{ genre[$i18n.locale] }}</router-link>
-        </span>
+      <div v-if="anime.genres && (anime.genres[0].length > 0 || anime.genres[1].length > 0)" class="right-footer">
+        <template v-if="anime.genres[0].length > 0">
+          <span v-for="genre in anime.genres[0]" :key="genre.id" class="genre" :class="`genre-${genre.id}`">
+            <router-link :to="`/anime/genre/${genre.id}`">{{ genre[$i18n.locale] }}</router-link>
+          </span>
+        </template>
+        <template v-if="anime.genres[1].length > 0">
+          <span v-for="genre in anime.genres[1]" :key="genre.id" class="sub-genre" :class="`genre-${genre.id}`">
+            <router-link :to="`/anime/genre/${genre.id}`">{{ genre[$i18n.locale] }}</router-link>
+          </span>
+        </template>
       </div>
     </div>
   </article>
