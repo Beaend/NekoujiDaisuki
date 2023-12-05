@@ -18,8 +18,8 @@ onBeforeMount(() => {
 const filteredOptions = computed(() => {
   return props.tags.filter((tag) => {
     const idNotIn = !props.activeTags.some(activeId => activeId[1] === tag.id)
-    const containtsInput = tag.ru.includes(newTag.value) || tag.en.includes(newTag.value) || tag.id === Number(newTag.value)
-    return idNotIn && containtsInput
+    const containsInput = tag.ru.includes(newTag.value) || tag.en.includes(newTag.value) || tag.id === Number(newTag.value)
+    return idNotIn && containsInput
   }).slice(0, 5)
 })
 
@@ -27,7 +27,7 @@ function removeTag(index) {
   props.activeTags.splice(index, 1)
 }
 function addTag(tag) {
-  props.activeTags.push([tag.ru, tag.id])
+  props.activeTags.push(tag)
   newTag.value = ''
 }
 function showTagsList() {
@@ -41,15 +41,17 @@ function hideTagsList() {
 
 <template>
   <div class="tags-input">
+    {{activeTags}}
     <div class="ti-input">
       <ul v-if="tags" class="ti-tags">
         <li
           v-for="(tag, index) in activeTags"
           :key="index"
           class="ti-tag"
+          :id="tag.id"
         >
           <div class="ti-tag-content">
-            {{ tag[0] }}
+            {{ tag[$i18n.locale] }} {{tag.id}}
           </div>
           <div class="ti-tag-action">
             <FontAwesomeIcon
@@ -109,11 +111,13 @@ function hideTagsList() {
   border-radius: 4px;
   display: flex;
   font-size: .8em;
+  height: 36px;
 }
 .ti-tag-action {
   cursor: pointer;
   color: rgb(191,191,191);
   transition: color .2s ease-out;
+  padding: 2px 0;
 }
 .ti-tag-action:hover {
   color: rgb(223,223,255);
