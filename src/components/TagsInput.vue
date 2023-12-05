@@ -41,7 +41,6 @@ function hideTagsList() {
 
 <template>
   <div class="tags-input">
-    {{activeTags}}
     <div class="ti-input">
       <ul v-if="tags" class="ti-tags">
         <li
