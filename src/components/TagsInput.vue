@@ -50,7 +50,7 @@ function hideTagsList() {
           :id="tag.id"
         >
           <div class="ti-tag-content">
-            {{ tag[$i18n.locale] }} {{tag.id}}
+            {{ tag[$i18n.locale] }}
           </div>
           <div class="ti-tag-action">
             <FontAwesomeIcon
