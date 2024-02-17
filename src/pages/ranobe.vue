@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import Api from '~/services/ApiCall.ts'
 import { Sorting } from '~/services/Sorting'
+import { displayStore } from '~/stores/display'
 
 defineOptions({
   name: 'RanobePage',
 })
 
 const { t } = useI18n()
+const display = displayStore()
 
 const books = ref(null)
 const genres = ref([])
@@ -38,7 +40,9 @@ function setGenresList() {
     })
   })
 
-  const sortedGenres = Object.entries(genresCount).sort((a, b) => b[1] - a[1])
+  let sortedGenres = Object.entries(genresCount).sort((a, b) => b[1] - a[1])
+  const ignoredGenresId = [1, 2, 4, 12]
+  sortedGenres = sortedGenres.filter(g => !ignoredGenresId.includes(Number(g[0])))
   const topGenres = sortedGenres.slice(0, 5).map(genre => genre[0])
   topGenres.forEach((genre) => {
     booksGenres.value[genre] = books.value.filter(book => book.genres[0].some(g => g.id === Number(genre)))
@@ -54,12 +58,40 @@ onMounted(async () => {
 <template>
   <main>
     <h2>{{ t('ranobe') }}</h2>
-    <div v-if="booksGenres" class="select-from-best-genres">
+    <div v-if="booksGenres && genres.length > 0 && display.window.width >= 1280" class="select-from-best-genres">
       <span
         class="genre-button" :class="[{ active: selectedGenre === 0 }]"
         @click="selectedGenre = 0"
       >
         All
+      </span>
+      <span class="genre-split">
+        <span
+          class="genre-button" :class="[{ active: selectedGenre === 1 }]"
+          @click="selectedGenre = 1"
+        >
+          {{ (genres.find(genre => genre.id === 1))[$i18n.locale] }}
+        </span>
+        <span
+          class="genre-button" :class="[{ active: selectedGenre === 2 }]"
+          @click="selectedGenre = 2"
+        >
+          {{ (genres.find(genre => genre.id === 2))[$i18n.locale] }}
+        </span>
+      </span>
+      <span class="genre-split">
+        <span
+          class="genre-button" :class="[{ active: selectedGenre === 4 }]"
+          @click="selectedGenre = 4"
+        >
+          {{ (genres.find(genre => genre.id === 4))[$i18n.locale] }}
+        </span>
+        <span
+          class="genre-button" :class="[{ active: selectedGenre === 12 }]"
+          @click="selectedGenre = 12"
+        >
+          {{ (genres.find(genre => genre.id === 12))[$i18n.locale] }}
+        </span>
       </span>
       <span
         v-for="(i) in Object.keys(booksGenres)" :key="i"
@@ -87,6 +119,8 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   user-select: none;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .genre-button {
   background: var(--bar_bg);
