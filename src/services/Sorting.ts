@@ -6,6 +6,20 @@ export class Sorting {
     this.data = data
   }
 
+  text(key: string, param?: any, reverse: boolean = false) {
+    switch (key) {
+      case 'name':
+        this.byName(param)
+        break
+      case 'quality':
+        this.byQuality()
+        break
+      case 'year':
+        this.byYear(reverse)
+        break
+    }
+  }
+
   byName(key: string) {
     this.data = this.data.sort((a: { [index: string]: any }, b: { [index: string]: any }) => {
       const titleA = a[key].toLowerCase()

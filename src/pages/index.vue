@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Api from '~/services/ApiCall.js'
+import Api from '~/services/ApiCall.ts'
 import { Sorting } from '~/services/Sorting.ts'
 
 defineOptions({
@@ -16,7 +16,7 @@ async function getActualSeason() {
   let year = new Date().getFullYear()
   const mm = new Date().getMonth() + 1
   let season = mm < 4 ? 1 : mm < 7 ? 2 : mm < 10 ? 3 : 4
-  let db: object = {}
+  let db: any = {}
   await Api.lastSeason().then((response) => {
     db = response.data
   })

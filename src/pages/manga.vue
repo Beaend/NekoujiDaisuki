@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Api from '~/services/ApiCall.js'
+import Api from '~/services/ApiCall.ts'
 
 defineOptions({
   name: 'MangaPage',

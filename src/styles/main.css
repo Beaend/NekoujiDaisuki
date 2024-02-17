@@ -67,6 +67,7 @@ h3 {
   justify-content: center;
   max-width: 2560px;
   margin: 0 auto;
+  position: relative;
 }
 
 .page-wrapper-image {
