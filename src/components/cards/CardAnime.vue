@@ -18,27 +18,20 @@ const cookies = userCookies()
 const titleUrl = ref(null)
 const overQuality = ref(false)
 const overMouseText = ref('')
+const cardMessage = ref('')
 
 function getTitleUrl() {
   if (cookies.baseAnimeUrlSite)
     titleUrl.value = props.anime.urls[cookies.baseAnimeUrlSite] || null
 }
 
-const followBlock = reactive({
-  display: 'block',
-  left: '0px',
-  top: '0px',
-})
-
 function copyTitle() {
   navigator.clipboard.writeText(props.anime.title)
-  overMouseText.value = 'Название скопировано'
-  followBlock.left = `${display.mousePosition[0] + (display.isTouch ? 0 : 30)}px`
-  followBlock.top = `${display.mousePosition[1]}px`
-  function removeOverMouseText() {
-    overMouseText.value = ''
-  }
-  setTimeout(removeOverMouseText, 1500)
+  cardMessage.value = 'Название скопировано'
+  setTimeout(removeMessage, 1500)
+}
+function removeMessage() {
+  cardMessage.value = ''
 }
 
 onBeforeMount(() => {
@@ -53,7 +46,6 @@ onBeforeMount(() => {
     @mouseover="display.backgroundUrl = anime.image"
     @mouseleave="display.backgroundUrl = null"
   >
-    <div v-if="overMouseText" :style="followBlock" class="followBlock">{{ overMouseText }}</div>
     <div class="card-left">
       <div class="image" :style="`background-image: url(${anime.image})`">
         <div class="quality" :class="{ over: overQuality }" @mouseover="overQuality = true" @mouseleave="overQuality = false">
@@ -136,6 +128,9 @@ onBeforeMount(() => {
         </template>
       </div>
     </div>
+    <div v-if="cardMessage" class="cardMessage">
+      {{ cardMessage }}
+    </div>
   </article>
 </template>
 
@@ -167,6 +162,7 @@ onBeforeMount(() => {
     display: flex;
     box-shadow: 0 4px 6px rgba(49,54,68,.05), 0 5px 20px rgba(49,54,68,.08);
     border-radius: 4px;
+    position: relative;
   }
   .card:hover {
     box-shadow: 0 4px 6px rgba(49,54,68,.09),0 10px 40px rgba(49,54,68,.3);
@@ -358,7 +354,7 @@ onBeforeMount(() => {
     .eth {
       display: flex;
       justify-content: space-evenly;
-      .source, .duration, .author, .season, .isEnded {
+      .source, .duration, .author, .season, .isEnded, .readingStatus {
         position: relative;
         padding: 4px;
         text-align: center;
@@ -368,7 +364,7 @@ onBeforeMount(() => {
     }
   }
   .card .tooltip {
-    width: 100px;
+    width: 120px;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -548,14 +544,16 @@ onBeforeMount(() => {
   .card ::-webkit-scrollbar-thumb:active {
     background: rgb(102,115,128);
   }
-  .followBlock {
+
+  .cardMessage {
     position: absolute;
-    max-width: 320px;
+    width: 320px;
     padding: 6px 12px;
     background-color: var(--bar_bg_3);
-    display: none;
-    z-index: 1;
     border-radius: 6px;
     border: 1px solid rgba(191,223,255,.2);
+    left: 50%;
+    transform: translate(-50%, 0);
+    top:25px;
   }
 </style>

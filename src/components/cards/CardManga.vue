@@ -14,31 +14,20 @@ const { t } = useI18n()
 const display = displayStore()
 
 const overQuality = ref(false)
-const overMouseText = ref('')
-
-const followBlock = reactive({
-  display: 'block',
-  left: '0px',
-  top: '0px',
-})
+const cardMessage = ref('')
 
 function copyTitle() {
   navigator.clipboard.writeText(props.manga.title)
-  overMouseText.value = 'Название скопировано'
-  followBlock.left = `${display.mousePosition[0] + (display.isTouch ? 0 : 30)}px`
-  followBlock.top = `${display.mousePosition[1]}px`
-  function removeOverMouseText() {
-    overMouseText.value = ''
-  }
-  setTimeout(removeOverMouseText, 1500)
+  cardMessage.value = 'Название скопировано'
+  setTimeout(removeMessage, 1500)
+}
+function removeMessage() {
+  cardMessage.value = ''
 }
 </script>
 
 <template>
   <article class="card manga" :class="[manga.color, manga.type]">
-    <div v-if="overMouseText" :style="followBlock" class="followBlock">
-      {{ overMouseText }}
-    </div>
     <div class="card-left">
       <div class="image" :style="`background-image: url(${manga.image})`">
         <div class="quality" :class="{ over: overQuality }" @mouseover="overQuality = true" @mouseleave="overQuality = false">
@@ -101,6 +90,9 @@ function copyTitle() {
           <router-link :to="`/anime/genre/${genre.id}`">{{ genre[$i18n.locale] }}</router-link>
         </span>
       </div>
+    </div>
+    <div v-if="cardMessage" class="cardMessage">
+      {{ cardMessage }}
     </div>
   </article>
 </template>

@@ -13,31 +13,20 @@ const { t } = useI18n()
 const display = displayStore()
 
 const overQuality = ref(false)
-const overMouseText = ref('')
-
-const followBlock = reactive({
-  display: 'block',
-  left: '0px',
-  top: '0px',
-})
+const cardMessage = ref('')
 
 function copyTitle() {
   navigator.clipboard.writeText(props.ranobe.title)
-  overMouseText.value = 'Название скопировано'
-  followBlock.left = `${display.mousePosition[0] + (display.isTouch ? 0 : 30)}px`
-  followBlock.top = `${display.mousePosition[1]}px`
-  function removeOverMouseText() {
-    overMouseText.value = ''
-  }
-  setTimeout(removeOverMouseText, 1500)
+  cardMessage.value = 'Название скопировано'
+  setTimeout(removeMessage, 1500)
+}
+function removeMessage() {
+  cardMessage.value = ''
 }
 </script>
 
 <template>
   <article class="card book ranobe" :class="ranobe.color">
-    <div v-if="overMouseText" :style="followBlock" class="followBlock">
-      {{ overMouseText }}
-    </div>
     <div class="card-left">
       <div class="image" :style="`background-image: url(${ranobe.image})`">
         <div class="quality" :class="{ over: overQuality }" @mouseover="overQuality = true" @mouseleave="overQuality = false">
@@ -78,6 +67,10 @@ function copyTitle() {
         <div class="space"/>
         <hr>
         <div class="eth">
+          <div class="readingStatus">
+            {{ ranobe.reading_status }}
+            <div class="tooltip">Прочитано/статус</div>
+          </div>
           <div class="duration">
             {{ ranobe.volumes }}
             <div class="tooltip">Количество томов/глав</div>
@@ -96,6 +89,9 @@ function copyTitle() {
           <router-link :to="`/anime/genre/${genre.id}`">{{ genre[$i18n.locale] }}</router-link>
         </span>
       </div>
+    </div>
+    <div v-if="cardMessage" class="cardMessage">
+      {{ cardMessage }}
     </div>
   </article>
 </template>
